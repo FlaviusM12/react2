@@ -14,7 +14,7 @@ const Create = () => {
         const blog = {title, body, author};
         
         await addDoc(blogsCollectionRef, blog);
-        await history.push("/");
+        await history.push("/reac2");
     }
 
     const [title, setTitle] = useState('');

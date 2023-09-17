@@ -24,7 +24,7 @@ const BlogDetails = () => {
     const handleDelete = async () => {
         const blogDoc = doc(db, "blogs", id);
         await deleteDoc(blogDoc);
-        history.push("/");
+        history.push("/react2");
     }
 
     return (

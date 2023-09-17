@@ -6,10 +6,7 @@ const Home = () => {
 
     // name acum e variabila reactive, cand se invoca functia seName triggeruieste react-ul sa re-randeze 
     // toata componenta
-    
-    // useEffect(() => {
     const {blogs, setBlogs, isPending} = useGetDocs();
-    // }, []);
 
     if (blogs)
         console.log(blogs);
