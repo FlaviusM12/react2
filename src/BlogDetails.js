@@ -1,10 +1,23 @@
 import { useHistory, useParams } from "react-router-dom";
-import useFetch from "./useFetch";
+import useGetDocs from "./useGetDocs";
+import { useState } from "react";
 
 const BlogDetails = () => {
     const { id } = useParams();
-    const {data: blog, isPending, error} = useFetch('http://localhost:8000/blogs/' + id);
+    const {blogs, setBlogs, isPending} = useGetDocs();
     const history = useHistory();
+    const [blog, setBlog] = useState(null);
+    const [isLoaded, setLoaded] = useState(false);
+
+    if (blogs && !isLoaded) {
+        let aux = null;
+        blogs.forEach(element => {
+            if (element.id == id)
+                aux = element;
+        });
+        setBlog(aux);
+        setLoaded(true);
+    }
 
     const handleDelete = () => {
         fetch('http://localhost:8000/blogs/' + id, {
@@ -17,7 +30,7 @@ const BlogDetails = () => {
     return (
         <div className="blog-details">
             {isPending && <div>Pending...</div>}
-            {error && <div> { error }</div>}
+            {/* {error && <div> { error }</div>} */}
             {blog && (
                 <article>
                     <h2>{ blog.title } </h2>

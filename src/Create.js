@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { useHistory} from 'react-router-dom';
+import { db } from './firebase-config';
+import {collection, addDoc} from "firebase/firestore"
 
 const Create = () => {
 
-    const handleSubmit = (e) => {
+
+    const blogsCollectionRef = collection(db, "blogs"); 
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsPending(true);
         const blog = {title, body, author};
-
-        fetch('http://localhost:8000/blogs', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(blog)
-        }).then(() => {
-            setIsPending(false);
-            // history.go(-1);
-            history.push("/");
-        })
-        console.log(blog);
+        
+        await addDoc(blogsCollectionRef, blog);
+        await history.push("/");
     }
 
     const [title, setTitle] = useState('');

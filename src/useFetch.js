@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-
-
 const useFetch = (resource) => {
 
     const [isPending, setPending] = useState(true);
