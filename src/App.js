@@ -6,21 +6,21 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import BlogDetails from './BlogDetails';
 function App() {
   return (
-    <Router>
+    <Router basename="/react2">
       <div className="App">
         <Navbar/>
         <div className="content">
           <Switch>
-            <Route exact path="/react2">
+            <Route exact path="/">
               <Home/>
             </Route>
-            <Route exact path="/react2/create">
+            <Route exact path="/create">
               <Create/>
             </Route>
-            <Route path="/react2/blogs/:id">
+            <Route path="/blogs/:id">
               <BlogDetails/>
             </Route>
-            <Route path="/react2">
+            <Route path="/*">
               <Home/>
             </Route>
           </Switch>
