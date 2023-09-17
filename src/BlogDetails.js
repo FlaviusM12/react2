@@ -1,6 +1,8 @@
 import { useHistory, useParams } from "react-router-dom";
 import useGetDocs from "./useGetDocs";
 import { useState } from "react";
+import {doc, deleteDoc, collection} from "firebase/firestore";
+import {db} from "./firebase-config";
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -19,12 +21,10 @@ const BlogDetails = () => {
         setLoaded(true);
     }
 
-    const handleDelete = () => {
-        fetch('http://localhost:8000/blogs/' + id, {
-            method:'DELETE',
-        }).then(() => {
-            history.push("/");            
-        });
+    const handleDelete = async () => {
+        const blogDoc = doc(db, "blogs", id);
+        await deleteDoc(blogDoc);
+        history.push("/");
     }
 
     return (
